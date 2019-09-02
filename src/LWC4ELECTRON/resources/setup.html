@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Setup Application</title>
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			#main {
+				min-height: 65px;
+				padding-top: 50px;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="shortcut icon" href="./favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="https://etsalads.herokuapp.com/slds/styles/salesforce-lightning-design-system.css" />
+	</head>
+	<body>
+		<div class="slds-grid slds-grid_frame">
+			<div class="slds-col slds-size_1-of-1 slds-align_absolute-center">
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_1-of-1">
+						<div class="slds-text-heading_large slds-align_absolute-center">
+							<span id="EventName">Event Name</span>
+						</div>
+					</div>
+					<div class="slds-col slds-size_1-of-1">
+						<div class="slds-form-element">
+							<label class="slds-form-element__label">
+								<abbr class="slds-required" title="required">* </abbr>
+								Room Name
+							</label>
+							<div class="slds-form-element__control">
+								<div class="slds-select_container">
+									<select class="slds-select" id="RoomsPicklist" required> </select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="slds-col slds-size_1-of-1">
+						<div class="slds-form-element ">
+							<label class="slds-form-element__label">
+								<abbr class="slds-required" title="required">* </abbr>
+								Computer Number
+							</label>
+							<div class="slds-form-element__control">
+								<div class="slds-select_container">
+									<input type="text" id="ComputerNumber" class="slds-input" onkeyup="RoomNumberKeyUp(event)" required />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="slds-col slds-size_1-of-1">
+						<div class="slds-m-top_x-small"></div>
+						<div class=" slds-align_absolute-center">
+							<button class="slds-button slds-button_brand" id="RegisterComputer" onclick="RegisterComputerClick()">Register Computer</button>
+						</div>
+					</div>
+					<div class="slds-col slds-size_1-of-1">
+						<div class=" slds-align_absolute-center">
+							<span id="Expires"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="./elRendererHelper.js"></script>
+	<script src="./setup.js"></script>
+</html>

@@ -1,0 +1,7 @@
+{
+	"mode": "info",
+	"openDevTools": false,
+	"preventQuit": false,
+	"useFakeIPAddress": true,
+	"testPings": -1
+}

@@ -1,0 +1,31 @@
+{
+	"interruptWithDialog": true,
+	"removeOldLogs": true,
+	"pages": {
+		"trailhead": "https://trailhead.salesforce.com/en/home",
+		"pingServer": "http://localhost:5000"
+	},
+	"timer": {
+		"master": {
+			"pattern": [0, 1, 0]
+		},
+		"callout": {
+			"pattern": [0, 10, 0]
+		},
+		"reset": {
+			"pattern": [0, 10, 0]
+		},
+		"XpageLoad": {
+			"pattern": [0, 0, 0]
+		},
+		"Xbreathe": {
+			"pattern": [0, 0, 0]
+		},
+		"Xuser": {
+			"pattern": [0, 0, 0]
+		},
+		"XautoClick": {
+			"pattern": [0, 0, 0]
+		}
+	}
+}
