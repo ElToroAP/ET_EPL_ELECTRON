@@ -37,6 +37,10 @@ const Logger = {
 
 			// Clear old log files
 			if (config.debug.removeOldLogs) {
+				if (!fs.existsSync(config.logger.folder)) {
+					fs.mkdirSync(config.logger.folder);
+				}
+
 				fs.readdir(config.logger.folder, (err, files) => {
 					if (err) throw err;
 
