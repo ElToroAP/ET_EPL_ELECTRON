@@ -37,9 +37,9 @@ module.exports = class ETEPL_Handshake {
 				config.logger.logs.addMessage(config.logger.levels.info, "Handshake", `Back from server. Action: ${response.output.action}`);
 				if (response.TMP) {
 					config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake", "Debug is being produced by server, show it!");
-					// config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake (INPUT)", response.input);
-					// config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake (OUTPUT)", response.output);
-					// config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake (TMP)", response.TMP);
+					config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake (INPUT)", response.input);
+					config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake (OUTPUT)", response.output);
+					config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake (TMP)", response.TMP);
 					console.dir(response);
 				}
 				config.setTimers(config, response.timers);

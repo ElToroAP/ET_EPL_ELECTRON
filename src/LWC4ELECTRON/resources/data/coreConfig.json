@@ -1,9 +1,9 @@
 {
-	"interruptWithDialog": true,
+	"interruptWithDialog": false,
 	"removeOldLogs": true,
 	"pages": {
 		"trailhead": "https://trailhead.salesforce.com/en/home",
-		"pingServer": "http://localhost:5000"
+		"pingServer": "https://et-epl-stage.herokuapp.com"
 	},
 	"timer": {
 		"master": {

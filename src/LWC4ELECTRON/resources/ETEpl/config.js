@@ -28,6 +28,7 @@ module.exports = class Config {
 		config.whichOS(config);
 
 		// Initialize Config
+		console.log(`Root Folder: ${rootFolder}`);
 		const core = config.readFile(rootFolder, "coreConfig");
 		config.local = {};
 		config.pages = core.pages;
@@ -78,7 +79,9 @@ module.exports = class Config {
 		let fileContents;
 
 		try {
-			fileContents = JSON.parse(fs.readFileSync(`${rootFolder}/data/${fileName}.json`));
+			const path = `${rootFolder}/data/${fileName}.json`;
+			fileContents = JSON.parse(fs.readFileSync(path));
+			console.log(`Read file: ${path}`);
 		} catch (ex) {
 			fileContents = {};
 		}
