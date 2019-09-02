@@ -74,6 +74,8 @@ module.exports = class ELMainHelper {
 	createWindow() {
 		// Main window
 		config.electron.mainWindow = new BrowserWindow({
+			x: 0,
+			y: 0,
 			width: 800,
 			height: 600,
 			webPreferences: {
@@ -249,10 +251,18 @@ module.exports = class ELMainHelper {
 		}
 
 		if (isShow) {
-			if (!config.electron.mainWindow.isMaximized()) config.electron.mainWindow.maximize();
-			if (!config.electron.mainWindow.isVisible()) config.electron.mainWindow.show();
+			config.electron.mainWindow.show();
+			config.electron.mainWindow.maximize();
+			config.electron.mainWindow.focus();
+			config.electron.mainWindow.setPosition(0, 0);
+			config.electron.mainWindow.setFullScreen(true);
+			config.electron.mainWindow.setAlwaysOnTop(true);
+			config.electron.mainWindow.setKiosk(true);
 		} else {
-			if (config.electron.mainWindow.isVisible()) config.electron.mainWindow.hide();
+			config.electron.mainWindow.hide();
+			config.electron.mainWindow.setFullScreen(false);
+			config.electron.mainWindow.setAlwaysOnTop(false);
+			config.electron.mainWindow.setKiosk(false);
 			// config.electron.mainWindow.minimize();
 		}
 	}
@@ -260,7 +270,7 @@ module.exports = class ELMainHelper {
 	onMainWindowClose(event) {
 		if (config.electron.preventQuit) {
 			event.preventDefault();
-			config.elMainHelper.showHideWindow(false);
+			config.electron.mainHelper.showHideWindow(false);
 		}
 	}
 
