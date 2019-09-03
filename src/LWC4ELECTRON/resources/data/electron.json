@@ -1,4 +1,9 @@
 {
-  "eventId": "a001h000003PJ6RAAW",
-  "testStep": 0
+	"eventId": "a001h000003PJ6RAAW",
+	"roomId": "a031h000001egq7AAA",
+	"computerNumber": "44",
+	"IPAddress": "64.231.58.191",
+	"IPAddressId": "a011h000002jh2SAAQ",
+	"locationId": "a021h000001JNuaAAG",
+	"computerId": 6
 }

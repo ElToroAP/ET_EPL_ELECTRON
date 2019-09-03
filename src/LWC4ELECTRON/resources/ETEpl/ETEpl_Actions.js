@@ -45,10 +45,14 @@ module.exports = class ETEPL_Actions {
 
 	handleMessage(message) {
 		// Handle message from UI
-		const currentAction = config.actions.fifo[0];
-		config.logger.logs.addMessage(config.logger.levels.info, "Handle Message", `Message for ${currentAction.data.name}`);
-		config.logger.logs.addMessage(config.logger.levels.data, "Handle Message", message);
-		if (currentAction.handleMessage) currentAction.handleMessage(message);
+		try {
+			const currentAction = config.actions.fifo[0];
+			config.logger.logs.addMessage(config.logger.levels.info, "Handle Message", `Message for ${currentAction.data.name}`);
+			config.logger.logs.addMessage(config.logger.levels.data, "Handle Message", message);
+			if (currentAction.handleMessage) currentAction.handleMessage(message);
+		} catch (ex) {
+			// Nothing, ignore it!
+		}
 	}
 
 	tick() {

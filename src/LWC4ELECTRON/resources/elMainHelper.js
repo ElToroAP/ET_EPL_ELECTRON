@@ -235,9 +235,8 @@ module.exports = class ELMainHelper {
 		if (p && p.resolve) {
 			delete config.load[newUrl];
 			p.resolve(newUrl);
-		} else {
-			config.actions.handleMessage({ type: "PageLoad", newUrl });
 		}
+		config.actions.handleMessage({ type: "PageLoad", newUrl });
 	}
 
 	showHideWindow(isShow) {

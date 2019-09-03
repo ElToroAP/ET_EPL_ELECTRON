@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 "use strict";
 
+const ETEPL_PauseMilliseconds = require("./ETEPL_PauseMilliseconds");
+
 let config;
 
 module.exports = class ETEPL_ComputerLogin {
@@ -30,10 +32,19 @@ module.exports = class ETEPL_ComputerLogin {
 			case "PageLoad":
 				const newUrl = message.newUrl;
 				if (newUrl === that.loginData.urlAfter) {
+					config.logger.logs.addMessage(config.logger.levels.info, "Computer Login", `Page Loaded: [${newUrl}]`);
 					switch (that.loginData.testStep) {
+						case 0:
+							that.updateElectronJson(1);
+							that.data.readyToRemove = true;
+							break;
 						case 1:
 							that.updateElectronJson(2);
-							config.logger.logs.addMessage(config.logger.levels.info, "Computer Login", `Page Loaded: [${newUrl}]`);
+							that.data.readyToRemove = true;
+							break;
+						case 2:
+							that.updateElectronJson(0);
+							config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
 							that.data.readyToRemove = true;
 							break;
 						default:
@@ -70,9 +81,7 @@ module.exports = class ETEPL_ComputerLogin {
 				that.performStep_01(that, config);
 				break;
 			case 2: // Clicks launch button
-				that._navigate(that, config).then(() => {
-					that.data.readyToRemove = true; // This is done... (For now, until I get more info from Dana)
-				});
+				that._navigate(that, config);
 				break;
 			default:
 				debugger;
@@ -137,14 +146,10 @@ module.exports = class ETEPL_ComputerLogin {
 	async _navigate(that, config, startAnywhere) {
 		if (startAnywhere || config.electron.url === that.loginData.urlBefore) {
 			config.electron.mainHelper
-				.loadPage(that.loginData.urlNavigate)
+				.loadPage(that.loginData.urlAfter)
 				.then(newUrl => {
-					if (that.loginData.urlNavigate === newUrl) {
-						// Step completed succesfully
-						that.loginData.testStep++;
-						that.updateElectronJson(that.loginData.testStep);
-						config.logger.logs.addMessage(config.logger.levels.info, "Computer Login", `Page Loaded: [${newUrl}]`);
-						that.data.readyToRemove = true;
+					if (that.loginData.urlAfter === newUrl) {
+						// NOTHING
 					} else {
 						throw new Error("Page loaded is not the requested");
 					}
@@ -160,38 +165,3 @@ module.exports = class ETEPL_ComputerLogin {
 		}
 	}
 };
-
-/*
-
-
-// webassessor_Prototype2() {
-//     return new Promise((resolve, reject) => {
-//         config.elMainHelper.requestWS('https://et-epl.herokuapp.com/p2', 'GET', {})
-//             .then(result => {
-//                 console.log(`Tick ${new Date().toISOString()} (${config.pages.isWebAssessorActive} => ${result.Active__c})`);
-//                 if (config.pages.isWebAssessorActive !== result.Active__c) {
-//                     // On Active change
-//                     config.pages.isWebAssessorActive = result.Active__c;
-
-//                     if (result.Active__c) {
-//                         config.elMainHelper.loadPage(config.pages.webassessor)
-//                             .then(() => {
-//                                 resolve(result);
-//                             })
-//                             .catch(err => {
-//                                 reject(`ERROR: ${err}`);
-//                             });
-//                     } else {
-//                         config.elMainHelper.showHideWindow(false);
-//                         resolve();
-//                     }
-//                 } else {
-//                     resolve(result);
-//                 }
-//             })
-//             .catch(err => {
-//                 reject(err);
-//             });
-//     });
-// }
-*/
