@@ -12,6 +12,8 @@ const dialog = electron.dialog;
 const ipcMain = electron.ipcMain;
 const nativeImage = electron.nativeImage;
 const BrowserWindow = electron.BrowserWindow;
+const session = electron.session;
+const shell = electron.shell;
 
 // Other libraries
 const ETEPL_Client = require("./ETEpl/ETEPL_Client");
@@ -102,6 +104,30 @@ module.exports = class ELMainHelper {
 			config.electron.mainHelper.onMainWindowClosed();
 		});
 
+		session.defaultSession.on("will-download", (event, downloadItem, webContents) => {
+			// https://electronjs.org/docs/api/session
+			// https://electronjs.org/docs/api/download-item
+			// https://electronjs.org/docs/api/shell
+
+			debugger;
+			console.dir(event);
+			console.dir(downloadItem);
+			console.dir(webContents);
+			downloadItem.on("done", (event, state) => {
+				switch (state) {
+					case "completed":
+						shell.openItem(downloadItem.getSavePath());
+						break;
+					case "cancelled":
+						break;
+					case "interrupted":
+						break;
+					default:
+						break;
+				}
+			});
+		});
+
 		config.electron.mainWindow.webContents.on("did-navigate", config.electron.mainHelper.onDidNavigate);
 	}
 
@@ -114,7 +140,7 @@ module.exports = class ELMainHelper {
 			if (isVisible) {
 				config.electron.mainHelper.showHideWindow(false);
 			} else {
-				config.electron.mainHelper.loadPage(config.pages.trailhead);
+				config.electron.mainHelper.loadPage(config.local.setup);
 			}
 		});
 
