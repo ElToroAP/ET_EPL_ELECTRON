@@ -1,5 +1,5 @@
 {
-	"mode": "fatal",
+	"mode": "info",
 	"openDevTools": false,
 	"preventQuit": true,
 	"useFakeIPAddress": false,
