@@ -23,7 +23,7 @@ module.exports = class ETEPL_Client {
 		// Actions
 		config.actions = new ETEPL_Actions(config);
 		config.actions.add(new ETEPL_PauseCycles(config, 5));
-		// Start...
+		// Start clock...
 		this._startClock();
 
 		// Reset testStep
