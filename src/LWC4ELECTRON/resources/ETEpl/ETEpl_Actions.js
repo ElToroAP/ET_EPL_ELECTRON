@@ -30,7 +30,7 @@ module.exports = class ETEPL_Actions {
 	}
 
 	closePage() {
-		config.electron.mainHelper.loadPage(config.local.blank, false);
+		config.electron.mainHelper.loadPage(config.pages.trailhead, false);
 	}
 
 	reset() {

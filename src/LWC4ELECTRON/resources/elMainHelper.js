@@ -115,7 +115,8 @@ module.exports = class ELMainHelper {
 			if (isVisible) {
 				config.electron.mainHelper.showHideWindow(false);
 			} else {
-				config.electron.mainHelper.loadPage(config.local.setup);
+				let urlOnclick = config.electron.url ? config.electron.url : config.pages.trailhead;
+				config.electron.mainHelper.loadPage(urlOnclick);
 			}
 		});
 
@@ -224,11 +225,11 @@ module.exports = class ELMainHelper {
 			}
 		});
 	}
-	
+
 	onDidNavigate(event, newUrl, httpResponseCode, httpStatusText) {
 		let isExam = false;
-		isExam = isExam || (newUrl.substr(0, newUrl.indexOf("?")+1) === "https://www.webassessor.com/hta.do?");
-		isExam = isExam || ((newUrl.substr(0, 7) === "file://") && (newUrl.substring(newUrl.lastIndexOf(".")) === ".hta"));
+		isExam = isExam || newUrl.substr(0, newUrl.indexOf("?") + 1) === "https://www.webassessor.com/hta.do?";
+		isExam = isExam || (newUrl.substr(0, 7) === "file://" && newUrl.substring(newUrl.lastIndexOf(".")) === ".hta");
 		if (isExam) {
 			// Execute
 			let cmd = "";
@@ -237,7 +238,7 @@ module.exports = class ELMainHelper {
 			if (config.os.isMac) {
 				cmd = `open ${newUrl}`;
 			} else {
-				cmd = `start ${newUrl}`;				
+				cmd = `start ${newUrl}`;
 			}
 
 			while (!examStarted) {
@@ -249,11 +250,11 @@ module.exports = class ELMainHelper {
 					dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
 				}
 			}
-			
+
 			// Go back to previous page
 			// setTimeout(() => {
-				config.electron.mainWindow.loadURL(config.electron.url);
-				// }, 250);
+			config.electron.mainWindow.loadURL(config.electron.url);
+			// }, 250);
 		} else {
 			config.logger.logs.addMessage(config.logger.levels.info, "Navigated", `Page loaded: [HTTP ${httpResponseCode}: ${httpStatusText}] ${newUrl}`);
 			config.electron.url = newUrl;
