@@ -14,10 +14,13 @@
 			"pattern": [0, 1, 0]
 		},
 		"callout": {
-			"pattern": [0, 10, 0]
+			"pattern": [2, 0, 0]
 		},
 		"reset": {
-			"pattern": [0, 10, 0]
+			"pattern": [10, 0, 0]
+		},
+		"autoClick": {
+			"pattern": [0, 5, 0]
 		},
 		"XpageLoad": {
 			"pattern": [0, 0, 0]
@@ -26,9 +29,6 @@
 			"pattern": [0, 0, 0]
 		},
 		"Xuser": {
-			"pattern": [0, 0, 0]
-		},
-		"XautoClick": {
 			"pattern": [0, 0, 0]
 		}
 	}
