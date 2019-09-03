@@ -38,8 +38,9 @@ module.exports = class ELMainHelper {
 
 			// Create UI
 			const appName = "Trailhead internet tester";
-			config.electron.mainHelper.createWindow(appName);
-			config.electron.mainHelper.createTray(appName);
+			const appIcon = nativeImage.createFromPath(config.local.icon);
+			config.electron.mainHelper.createWindow(appName, appIcon);
+			config.electron.mainHelper.createTray(appName, appIcon);
 
 			ipcMain.on("startApp", () => {
 				config.electron.preventQuit = config.debug.preventQuit;
@@ -72,7 +73,7 @@ module.exports = class ELMainHelper {
 		});
 	}
 
-	createWindow(appName) {
+	createWindow(appName, appIcon) {
 		// Main window
 		config.electron.mainWindow = new BrowserWindow({
 			x: 0,
@@ -84,7 +85,7 @@ module.exports = class ELMainHelper {
 				backgroundThrottling: false,
 				nodeIntegration: true
 			},
-
+			icon: appIcon,
 			minimizable: true,
 			fullscreenable: false, // Mac OSX would use a new Desktop
 			skipTaskbar: true
@@ -101,15 +102,11 @@ module.exports = class ELMainHelper {
 			config.electron.mainHelper.onMainWindowClosed();
 		});
 
-		// Changes the icon on Windows, not MAc.
-		config.electron.mainWindow.setOverlayIcon(config.local.icon, appName);
-
 		config.electron.mainWindow.webContents.on("did-navigate", config.electron.mainHelper.onDidNavigate);
 	}
 
-	createTray(appName) {
-		const trayIcon = nativeImage.createFromPath(config.local.icon);
-		config.electron.tray = new Tray(trayIcon);
+	createTray(appName, appIcon) {
+		config.electron.tray = new Tray(appIcon);
 		config.electron.tray.setToolTip(appName);
 
 		config.electron.tray.on("click", () => {
