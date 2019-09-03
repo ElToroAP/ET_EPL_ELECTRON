@@ -37,8 +37,9 @@ module.exports = class ELMainHelper {
 			config.electron.preventQuit = config.debug.preventQuit;
 
 			// Create UI
-			config.electron.mainHelper.createWindow();
-			config.electron.mainHelper.createTray();
+			const appName = "Trailhead internet tester";
+			config.electron.mainHelper.createWindow(appName);
+			config.electron.mainHelper.createTray(appName);
 
 			ipcMain.on("startApp", () => {
 				config.electron.preventQuit = config.debug.preventQuit;
@@ -71,7 +72,7 @@ module.exports = class ELMainHelper {
 		});
 	}
 
-	createWindow() {
+	createWindow(appName) {
 		// Main window
 		config.electron.mainWindow = new BrowserWindow({
 			x: 0,
@@ -100,13 +101,16 @@ module.exports = class ELMainHelper {
 			config.electron.mainHelper.onMainWindowClosed();
 		});
 
+		// Changes the icon on Windows, not MAc.
+		config.electron.mainWindow.setOverlayIcon(config.local.icon, appName);
+
 		config.electron.mainWindow.webContents.on("did-navigate", config.electron.mainHelper.onDidNavigate);
 	}
 
-	createTray() {
+	createTray(appName) {
 		const trayIcon = nativeImage.createFromPath(config.local.icon);
 		config.electron.tray = new Tray(trayIcon);
-		config.electron.tray.setToolTip("Trailhead Internet Tester");
+		config.electron.tray.setToolTip(appName);
 
 		config.electron.tray.on("click", () => {
 			const isVisible = config.electron.mainWindow.isVisible();

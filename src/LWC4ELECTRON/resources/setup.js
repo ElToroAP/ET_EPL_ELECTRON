@@ -68,6 +68,6 @@ toMain({
 			const minutes = Math.floor(myTimer.secondsRemaining / 60);
 			const seconds = `${Math.floor(myTimer.secondsRemaining - minutes * 60)}`;
 			document.getElementById("Expires").innerHTML = `${minutes} : ${seconds.padStart(2, "0")}`;
-		}, 1000);
+		}, 250);
 	}
 });

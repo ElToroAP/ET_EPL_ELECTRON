@@ -1,6 +1,6 @@
 {
 	"name": "eltoroit",
-	"productName": "eltoroit",
+	"productName": "ETTrailheadTester",
 	"version": "1.0.0",
 	"description": "My Electron application description",
 	"main": "src/elMain.js",
