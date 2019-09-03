@@ -12,12 +12,11 @@ const dialog = electron.dialog;
 const ipcMain = electron.ipcMain;
 const nativeImage = electron.nativeImage;
 const BrowserWindow = electron.BrowserWindow;
-const session = electron.session;
-const shell = electron.shell;
 
 // Other libraries
 const ETEPL_Client = require("./ETEpl/ETEPL_Client");
 const Config = require("./ETEpl/config");
+const child_process = require("child_process");
 
 // Other static variables
 let config;
@@ -102,30 +101,6 @@ module.exports = class ELMainHelper {
 
 		config.electron.mainWindow.on("closed", () => {
 			config.electron.mainHelper.onMainWindowClosed();
-		});
-
-		session.defaultSession.on("will-download", (event, downloadItem, webContents) => {
-			// https://electronjs.org/docs/api/session
-			// https://electronjs.org/docs/api/download-item
-			// https://electronjs.org/docs/api/shell
-
-			debugger;
-			console.dir(event);
-			console.dir(downloadItem);
-			console.dir(webContents);
-			downloadItem.on("done", (event, state) => {
-				switch (state) {
-					case "completed":
-						shell.openItem(downloadItem.getSavePath());
-						break;
-					case "cancelled":
-						break;
-					case "interrupted":
-						break;
-					default:
-						break;
-				}
-			});
 		});
 
 		config.electron.mainWindow.webContents.on("did-navigate", config.electron.mainHelper.onDidNavigate);
@@ -249,21 +224,51 @@ module.exports = class ELMainHelper {
 			}
 		});
 	}
-
+	
 	onDidNavigate(event, newUrl, httpResponseCode, httpStatusText) {
-		config.logger.logs.addMessage(config.logger.levels.info, "Navigated", `Page loaded: [HTTP ${httpResponseCode}: ${httpStatusText}] ${newUrl}`);
-		config.electron.url = newUrl;
+		let isExam = false;
+		isExam = isExam || (newUrl.substr(0, newUrl.indexOf("?")+1) === "https://www.webassessor.com/hta.do?");
+		isExam = isExam || ((newUrl.substr(0, 7) === "file://") && (newUrl.substring(newUrl.lastIndexOf(".")) === ".hta"));
+		if (isExam) {
+			// Execute
+			let cmd = "";
+			let examStarted = false;
 
-		if (config.debug.openDevTools) {
-			config.electron.mainWindow.webContents.openDevTools();
-		}
+			if (config.os.isMac) {
+				cmd = `open ${newUrl}`;
+			} else {
+				cmd = `start ${newUrl}`;				
+			}
 
-		const p = config.load[newUrl];
-		if (p && p.resolve) {
-			delete config.load[newUrl];
-			p.resolve(newUrl);
+			while (!examStarted) {
+				try {
+					child_process.execSync(cmd);
+					// EXAM HAS SARTED!!!
+					examStarted = true;
+				} catch (ex) {
+					dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
+				}
+			}
+			
+			// Go back to previous page
+			// setTimeout(() => {
+				config.electron.mainWindow.loadURL(config.electron.url);
+				// }, 250);
+		} else {
+			config.logger.logs.addMessage(config.logger.levels.info, "Navigated", `Page loaded: [HTTP ${httpResponseCode}: ${httpStatusText}] ${newUrl}`);
+			config.electron.url = newUrl;
+
+			if (config.debug.openDevTools) {
+				config.electron.mainWindow.webContents.openDevTools();
+			}
+
+			const p = config.load[newUrl];
+			if (p && p.resolve) {
+				delete config.load[newUrl];
+				p.resolve(newUrl);
+			}
+			config.actions.handleMessage({ type: "PageLoad", newUrl });
 		}
-		config.actions.handleMessage({ type: "PageLoad", newUrl });
 	}
 
 	showHideWindow(isShow) {
@@ -286,7 +291,7 @@ module.exports = class ELMainHelper {
 			config.electron.mainWindow.setSkipTaskbar(false);
 			setTimeout(() => {
 				config.electron.mainWindow.setAlwaysOnTop(false);
-			}, config.timer.autoClick);
+			}, 250);
 		} else {
 			config.electron.mainWindow.hide();
 			config.electron.mainWindow.setFullScreen(false);
