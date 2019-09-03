@@ -43,8 +43,7 @@ module.exports = class ETEPL_ComputerLogin {
 							that.data.readyToRemove = true;
 							break;
 						case 2:
-							that.updateElectronJson(0);
-							config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
+							that.updateElectronJson(-1);
 							that.data.readyToRemove = true;
 							break;
 						default:
