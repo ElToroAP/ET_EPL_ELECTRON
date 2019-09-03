@@ -61,11 +61,11 @@ module.exports = class ETEPL_Client {
 			const reqWS = net.request(clientReq);
 			if (method === "POST") {
 				reqWS.setHeader("Content-Type", "application/json");
-				config.logger.logs.addMessage(config.logger.levels.trace, "Web Service", "POST to server");
+				config.logger.logs.addMessage(config.logger.levels.trace, "Web Service", `POST: ${clientReq.path}`);
 				config.logger.logs.addMessage(config.logger.levels.data, "Web Service", inputData);
 				reqWS.write(inputData);
 			} else {
-				config.logger.logs.addMessage(config.logger.levels.trace, "Web Service", "GET to server");
+				config.logger.logs.addMessage(config.logger.levels.trace, "Web Service", `GET: ${clientReq.path}`);
 			}
 			reqWS.on("response", resWS => {
 				resWS.setEncoding("utf8");

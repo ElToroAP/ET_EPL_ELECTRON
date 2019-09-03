@@ -3,7 +3,9 @@
 	"removeOldLogs": true,
 	"pages": {
 		"trailhead": "https://trailhead.salesforce.com/en/home",
-		"pingServer": "https://et-epl-stage.herokuapp.com"
+		"pingServerLOCAL": "http://localhost:5000",
+		"pingServerPROD": "https://et-epl-stage.herokuapp.com",
+		"pingServer": "http://localhost:5000"
 	},
 	"timer": {
 		"master": {

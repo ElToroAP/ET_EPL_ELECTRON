@@ -257,12 +257,12 @@ module.exports = class ELMainHelper {
 			config.electron.mainWindow.setPosition(0, 0);
 			config.electron.mainWindow.setFullScreen(true);
 			config.electron.mainWindow.setAlwaysOnTop(true);
-			config.electron.mainWindow.setKiosk(true);
+			// config.electron.mainWindow.setKiosk(true);
 		} else {
 			config.electron.mainWindow.hide();
 			config.electron.mainWindow.setFullScreen(false);
 			config.electron.mainWindow.setAlwaysOnTop(false);
-			config.electron.mainWindow.setKiosk(false);
+			// config.electron.mainWindow.setKiosk(false);
 			// config.electron.mainWindow.minimize();
 		}
 	}

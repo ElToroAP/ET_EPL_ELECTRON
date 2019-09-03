@@ -215,7 +215,7 @@ const Logger = {
 
 			lineNumber = stack[0];
 			if (config.os.isWin) {
-				lineNumber = lineNumber.substr(lineNumber.lastIndexOf("\\"));
+				lineNumber = lineNumber.substr(lineNumber.lastIndexOf("\\") + 1);
 			} else {
 				lineNumber = lineNumber.substr(lineNumber.lastIndexOf("/") + 1);
 			}
