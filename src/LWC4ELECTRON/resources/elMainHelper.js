@@ -115,6 +115,7 @@ module.exports = class ELMainHelper {
 			console.dir(downloadItem);
 			console.dir(webContents);
 			downloadItem.on("done", (event, state) => {
+				debugger;
 				switch (state) {
 					case "completed":
 						// Execute
@@ -136,7 +137,7 @@ module.exports = class ELMainHelper {
 								dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
 							}
 						}
-						config.electron.mainWindow.loadURL(config.electron.url);
+						config.electron.mainHelper.showHideWindow(false);
 						break;
 					case "cancelled":
 						break;
@@ -159,6 +160,7 @@ module.exports = class ELMainHelper {
 				config.electron.mainHelper.showHideWindow(false);
 			} else {
 				let urlOnclick = config.electron.url ? config.electron.url : config.pages.trailhead;
+				urlOnclick = config.local.setup;
 				config.electron.mainHelper.loadPage(urlOnclick);
 			}
 		});
