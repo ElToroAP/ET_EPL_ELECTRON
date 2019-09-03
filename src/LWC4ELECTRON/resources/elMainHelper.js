@@ -10,6 +10,7 @@ const Tray = electron.Tray;
 const Menu = electron.Menu;
 const dialog = electron.dialog;
 const ipcMain = electron.ipcMain;
+const session = electron.session;
 const nativeImage = electron.nativeImage;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -104,6 +105,48 @@ module.exports = class ELMainHelper {
 		});
 
 		config.electron.mainWindow.webContents.on("did-navigate", config.electron.mainHelper.onDidNavigate);
+		session.defaultSession.on("will-download", (event, downloadItem, webContents) => {
+			// https://electronjs.org/docs/api/session
+			// https://electronjs.org/docs/api/download-item
+			// https://electronjs.org/docs/api/shell
+
+			debugger;
+			console.dir(event);
+			console.dir(downloadItem);
+			console.dir(webContents);
+			downloadItem.on("done", (event, state) => {
+				switch (state) {
+					case "completed":
+						// Execute
+						let cmd = "";
+						let examStarted = false;
+
+						if (config.os.isMac) {
+							cmd = `open ${downloadItem.getSavePath()}`;
+						} else {
+							cmd = `start ${downloadItem.getSavePath()}`;
+						}
+
+						while (!examStarted) {
+							try {
+								child_process.execSync(cmd);
+								// EXAM HAS SARTED!!!
+								examStarted = true;
+							} catch (ex) {
+								dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
+							}
+						}
+						config.electron.mainWindow.loadURL(config.electron.url);
+						break;
+					case "cancelled":
+						break;
+					case "interrupted":
+						break;
+					default:
+						break;
+				}
+			});
+		});
 	}
 
 	createTray(appName, appIcon) {
@@ -227,49 +270,49 @@ module.exports = class ELMainHelper {
 	}
 
 	onDidNavigate(event, newUrl, httpResponseCode, httpStatusText) {
-		let isExam = false;
-		isExam = isExam || newUrl.substr(0, newUrl.indexOf("?") + 1) === "https://www.webassessor.com/hta.do?";
-		isExam = isExam || (newUrl.substr(0, 7) === "file://" && newUrl.substring(newUrl.lastIndexOf(".")) === ".hta");
-		if (isExam) {
-			// Execute
-			let cmd = "";
-			let examStarted = false;
+		// let isExam = false;
+		// isExam = isExam || newUrl.substr(0, newUrl.indexOf("?") + 1) === "https://www.webassessor.com/hta.do?";
+		// isExam = isExam || (newUrl.substr(0, 7) === "file://" && newUrl.substring(newUrl.lastIndexOf(".")) === ".hta");
+		// if (isExam) {
+		// 	// Execute
+		// 	let cmd = "";
+		// 	let examStarted = false;
 
-			if (config.os.isMac) {
-				cmd = `open ${newUrl}`;
-			} else {
-				cmd = `start ${newUrl}`;
-			}
+		// 	if (config.os.isMac) {
+		// 		cmd = `open ${newUrl}`;
+		// 	} else {
+		// 		cmd = `start ${newUrl}`;
+		// 	}
 
-			while (!examStarted) {
-				try {
-					child_process.execSync(cmd);
-					// EXAM HAS SARTED!!!
-					examStarted = true;
-				} catch (ex) {
-					dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
-				}
-			}
+		// 	while (!examStarted) {
+		// 		try {
+		// 			child_process.execSync(cmd);
+		// 			// EXAM HAS SARTED!!!
+		// 			examStarted = true;
+		// 		} catch (ex) {
+		// 			dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
+		// 		}
+		// 	}
 
-			// Go back to previous page
-			// setTimeout(() => {
-			config.electron.mainWindow.loadURL(config.electron.url);
-			// }, 250);
-		} else {
-			config.logger.logs.addMessage(config.logger.levels.info, "Navigated", `Page loaded: [HTTP ${httpResponseCode}: ${httpStatusText}] ${newUrl}`);
-			config.electron.url = newUrl;
+		// 	// Go back to previous page
+		// 	// setTimeout(() => {
+		// 	config.electron.mainWindow.loadURL(config.electron.url);
+		// 	// }, 250);
+		// } else {
+		config.logger.logs.addMessage(config.logger.levels.info, "Navigated", `Page loaded: [HTTP ${httpResponseCode}: ${httpStatusText}] ${newUrl}`);
+		config.electron.url = newUrl;
 
-			if (config.debug.openDevTools) {
-				config.electron.mainWindow.webContents.openDevTools();
-			}
-
-			const p = config.load[newUrl];
-			if (p && p.resolve) {
-				delete config.load[newUrl];
-				p.resolve(newUrl);
-			}
-			config.actions.handleMessage({ type: "PageLoad", newUrl });
+		if (config.debug.openDevTools) {
+			config.electron.mainWindow.webContents.openDevTools();
 		}
+
+		const p = config.load[newUrl];
+		if (p && p.resolve) {
+			delete config.load[newUrl];
+			p.resolve(newUrl);
+		}
+		config.actions.handleMessage({ type: "PageLoad", newUrl });
+		// }
 	}
 
 	showHideWindow(isShow) {

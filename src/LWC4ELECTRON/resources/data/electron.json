@@ -5,5 +5,6 @@
   "IPAddress": "204.14.236.153",
   "IPAddressId": "a011h000002jhYgAAI",
   "locationId": "a021h000001JNrWAAW",
-  "computerId": 11
+  "computerId": 11,
+  "testStep": -1
 }
