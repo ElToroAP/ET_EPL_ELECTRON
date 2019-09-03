@@ -1,6 +1,7 @@
 {
 	"mode": "data",
 	"openDevTools": false,
+	"fullMenus": true,
 	"preventQuit": true,
 	"useFakeIPAddress": false,
 	"testPings": -1

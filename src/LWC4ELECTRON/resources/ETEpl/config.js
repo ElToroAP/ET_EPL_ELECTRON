@@ -57,6 +57,7 @@ module.exports = class Config {
 		// Pages
 		config.pages.ping = `${config.pages.pingServer}/handshake`;
 		config.pages.register = `${config.pages.pingServer}/register`;
+		config.pages.sampleFile = `${config.pages.pingServer}/sampleFile`; // Exam during tests
 
 		// Local Files
 		config.local.demo = `file://${rootFolder}/demo.html`;

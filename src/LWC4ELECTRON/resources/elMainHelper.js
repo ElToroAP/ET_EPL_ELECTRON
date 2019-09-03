@@ -105,49 +105,7 @@ module.exports = class ELMainHelper {
 		});
 
 		config.electron.mainWindow.webContents.on("did-navigate", config.electron.mainHelper.onDidNavigate);
-		session.defaultSession.on("will-download", (event, downloadItem, webContents) => {
-			// https://electronjs.org/docs/api/session
-			// https://electronjs.org/docs/api/download-item
-			// https://electronjs.org/docs/api/shell
-
-			debugger;
-			console.dir(event);
-			console.dir(downloadItem);
-			console.dir(webContents);
-			downloadItem.on("done", (event, state) => {
-				debugger;
-				switch (state) {
-					case "completed":
-						// Execute
-						let cmd = "";
-						let examStarted = false;
-
-						if (config.os.isMac) {
-							cmd = `open ${downloadItem.getSavePath()}`;
-						} else {
-							cmd = `start ${downloadItem.getSavePath()}`;
-						}
-
-						while (!examStarted) {
-							try {
-								child_process.execSync(cmd);
-								// EXAM HAS SARTED!!!
-								examStarted = true;
-							} catch (ex) {
-								dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
-							}
-						}
-						config.electron.mainHelper.showHideWindow(false);
-						break;
-					case "cancelled":
-						break;
-					case "interrupted":
-						break;
-					default:
-						break;
-				}
-			});
-		});
+		session.defaultSession.on("will-download", config.electron.mainHelper.downloadfile);
 	}
 
 	createTray(appName, appIcon) {
@@ -160,7 +118,7 @@ module.exports = class ELMainHelper {
 				config.electron.mainHelper.showHideWindow(false);
 			} else {
 				let urlOnclick = config.electron.url ? config.electron.url : config.pages.trailhead;
-				urlOnclick = config.local.setup;
+				// For tests... urlOnclick = config.local.setup;
 				config.electron.mainHelper.loadPage(urlOnclick);
 			}
 		});
@@ -182,43 +140,18 @@ module.exports = class ELMainHelper {
 			}
 		});
 
-		// Webassessor
-		trayMenu.push({
-			label: "Webassessor",
-			click: (/* menuItem, browserWindow, event */) => {
-				config.electron.mainHelper.loadPage(config.pages.webassessorPage);
-			}
-		});
-
-		// Setup Page
-		trayMenu.push({
-			label: "Setup Page",
-			submenu: [
-				{
-					label: "Open",
-					click: () => {
-						config.electron.mainHelper.loadPage(config.local.setup);
-					}
-				},
-				{
-					label: "Ping",
-					click: () => {
-						config.electron.mainWindow.webContents.send("ping", { data: "Hello World" });
-					}
+		// Download Test
+		if (config.debug.fullMenus) {
+			trayMenu.push({
+				label: "Download Test",
+				click: (/* menuItem, browserWindow, event */) => {
+					config.electron.mainHelper.loadPage(config.pages.sampleFile);
 				}
-			]
-		});
+			});
+		}
 
-		// Demo Page
-		trayMenu.push({
-			label: "Demo Page",
-			click: () => {
-				config.electron.mainHelper.loadPage(config.local.demo);
-			}
-		});
-
-		// Chrome Developer tools
 		if (config.debug.openDevTools) {
+			// Chrome Developer tools
 			trayMenu.push({
 				label: "Developer Tools",
 				click: () => {
@@ -227,33 +160,22 @@ module.exports = class ELMainHelper {
 			});
 		}
 
-		// Check speed
-		trayMenu.push({
-			label: "Check speed",
-			click: (/* menuItem, browserWindow, event */) => {
-				dialog.showErrorBox(`Not Implemented yet`, `Need to implement this!`);
-			}
-		});
+		// // Check speed
+		// trayMenu.push({
+		// 	label: "Check speed",
+		// 	click: (/* menuItem, browserWindow, event */) => {
+		// 		dialog.showErrorBox(`Not Implemented yet`, `Need to implement this!`);
+		// 	}
+		// });
 
-		// Quit
-		trayMenu.push({
-			label: "Quit",
-			submenu: [
-				{
-					label: "Quit",
-					click: () => {
-						config.electron.app.quit();
-					}
-				},
-				{
-					label: "Force Quit",
-					click: () => {
-						config.electron.preventQuit = false;
-						config.electron.app.quit();
-					}
-				}
-			]
-		});
+		// // Quit
+		// trayMenu.push({
+		// 	label: "Quit",
+		// 	click: () => {
+		// 		config.electron.preventQuit = false;
+		// 		config.electron.app.quit();
+		// 	}
+		// });
 
 		return trayMenu;
 	}
@@ -267,6 +189,48 @@ module.exports = class ELMainHelper {
 				if (!config.load) config.load = {};
 				config.load[newUrl] = { resolve, reject };
 				config.electron.mainWindow.loadURL(newUrl);
+			}
+		});
+	}
+
+	downloadfile(event, downloadItem, webContents) {
+		// https://electronjs.org/docs/api/session
+		// https://electronjs.org/docs/api/download-item
+		downloadItem.on("done", (event, state) => {
+			switch (state) {
+				case "completed":
+					// Execute
+					let cmd = "";
+					let examStarted = false;
+
+					if (config.os.isMac) {
+						cmd = `open ${downloadItem.getSavePath()}`;
+					} else {
+						cmd = `start ${downloadItem.getSavePath()}`;
+					}
+
+					while (!examStarted) {
+						try {
+							child_process.execSync(cmd);
+							// EXAM HAS SARTED!!!
+							examStarted = true;
+						} catch (ex) {
+							if (config.os.isMac) {
+								// The exam is not for Mac :-)
+								examStarted = true;
+							} else {
+								dialog.showErrorBox(`Critical Error`, `You must accept to run the exam!`);
+							}
+						}
+					}
+					config.electron.mainHelper.showHideWindow(false);
+					break;
+				case "cancelled":
+					break;
+				case "interrupted":
+					break;
+				default:
+					break;
 			}
 		});
 	}
