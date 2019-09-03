@@ -24,7 +24,7 @@ module.exports = class ETEPL_Client {
 		config.actions = new ETEPL_Actions(config);
 		config.actions.add(new ETEPL_PauseCycles(config, 5));
 		// Start...
-		// this._startClock();
+		this._startClock();
 
 		// Reset testStep
 		const electronJson = config.etEpl.readElectronJson();
