@@ -33,27 +33,11 @@ module.exports = class ETEPL_ComputerLogin {
 				const newUrl = message.newUrl;
 				if (newUrl === that.loginData.urlAfter) {
 					config.logger.logs.addMessage(config.logger.levels.info, "Computer Login", `Page Loaded: [${newUrl}]`);
-					switch (that.loginData.testStep) {
-						case 0:
-							that.updateElectronJson(1);
-							that.data.readyToRemove = true;
-							break;
-						case 1:
-							that.updateElectronJson(2);
-							that.data.readyToRemove = true;
-							break;
-						case 2:
-							that.updateElectronJson(-1);
-							that.data.readyToRemove = true;
-							break;
-						default:
-							config.logger.addMessage(config.logger.levels.fatal, "Computer Login", `Was not expecting this testStep: ${that.loginData.testStep}`);
-							break;
-					}
+					that.updateElectronJson(that.loginData.testStep + 1);
+					that.data.readyToRemove = true;
 				} else {
-					config.logger.addMessage(config.logger.levels.fatal, "Computer Login", `Was not expecting this Url: ${newUrl}. Expecting: ${that.loginData.urlAfter}`);
+					config.logger.logs.addMessage(config.logger.levels.fatal, "Computer Login", `Navigate to an unexpected page. Expected [${that.loginData.urlAfter}], Actual [${newUrl}]`);
 				}
-				break;
 			default:
 				config.logger.addMessage(config.logger.levels.fatal, "Computer Login", `Was not expecting this message type: ${message.type}. Expecting: "PageLoad"`);
 				break;
@@ -83,7 +67,7 @@ module.exports = class ETEPL_ComputerLogin {
 				that._navigate(that, config);
 				break;
 			default:
-				debugger;
+				// Other steps are driven by the user.
 				break;
 		}
 	}

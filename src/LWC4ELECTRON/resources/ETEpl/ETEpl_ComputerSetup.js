@@ -76,6 +76,7 @@ module.exports = class ETEPL_ComputerSetup {
 	updateElectronJson(message) {
 		const electronJson = config.etEpl.readElectronJson();
 		electronJson.roomId = message.data.roomId;
+		electronJson.roomName = message.data.roomName;
 		electronJson.computerNumber = message.data.computerNumber;
 		if (config.debug.useFakeIPAddress) {
 			electronJson.IPAddress = `${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}.${Math.floor(Math.random() * 200)}`;
