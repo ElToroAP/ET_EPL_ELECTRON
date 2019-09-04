@@ -68,14 +68,19 @@ module.exports = class ETEPL_Handshake {
 						break;
 					case "SETUP":
 						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SETUP requested by server");
-						if (electronJson.computerId) {
-							config.logger.logs.addMessage(config.logger.levels.info, "Handshake", `SETUP skippped because I have ComputerId=${electronJson.computerId}`);
-							electronJson.forceReset = null;
-							config.etEpl.writeElectronJson(electronJson);
+						if (electronJson.resetStrength > 0) {
+							debugger;
+							config.actions.add(new ETEPL_ComputerSetup(config, { ...response.output, ...electronJson }));
 						} else {
-							config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SETUP will be performed");
-							config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
-							config.actions.add(new ETEPL_ComputerSetup(config, response.output));
+							if (electronJson.computerId) {
+								config.logger.logs.addMessage(config.logger.levels.info, "Handshake", `SETUP skippped because I have ComputerId=${electronJson.computerId}`);
+								electronJson.forceReset = null;
+								config.etEpl.writeElectronJson(electronJson);
+							} else {
+								config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SETUP will be performed");
+								config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
+								config.actions.add(new ETEPL_ComputerSetup(config, response.output));
+							}
 						}
 						that.data.readyToRemove = true;
 						break;

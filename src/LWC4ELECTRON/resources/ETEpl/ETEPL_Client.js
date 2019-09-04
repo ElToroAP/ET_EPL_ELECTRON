@@ -52,7 +52,10 @@ module.exports = class ETEPL_Client {
 		// https://electronjs.org/docs/api/net
 		// https://electronjs.org/docs/api/client-request
 		return new Promise((resolve, reject) => {
+			let debugRoute = "";
 			if (config.debug.showCallouts) {
+				debugRoute = `${method} ${reqUrl}`;
+				console.error(`{UP: "${debugRoute}"},`);
 				console.log(
 					`${JSON.stringify({
 						dttm: new Date(),
@@ -89,10 +92,12 @@ module.exports = class ETEPL_Client {
 					try {
 						output = JSON.parse(outputData);
 						if (config.debug.showCallouts) {
+							if (String(reqUrl).indexOf("handshake") > 0) debugRoute += ` (${output.output.action})`;
+							console.error(`{DOWN: "${debugRoute}"},`);
 							console.log(
 								`${JSON.stringify({
 									dttm: new Date(),
-									response: `${method} ${reqUrl}`,
+									response: `${method} ${reqUrl} ${String(reqUrl).indexOf("handshake" > 0) ? "(" + output.output.action + ")" : ""}`,
 									receives: output
 								})},`
 							);

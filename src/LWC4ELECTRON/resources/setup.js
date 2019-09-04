@@ -19,7 +19,8 @@ function loadData(data) {
 		roomsPicklist.appendChild(opt);
 		data.rooms.forEach(room => {
 			opt = document.createElement("option");
-			opt.value = `${room.sfid}|${room.name}`;
+			opt.id = `${room.sfid}`;
+			opt.value = `${room.sfid}`;
 			opt.innerHTML = room.name;
 			roomsPicklist.appendChild(opt);
 		});
@@ -38,9 +39,9 @@ function RoomNumberKeyUp(event) {
 }
 
 function RegisterComputerClick() {
-	const value = document.getElementById("RoomsPicklist").value;
-	const roomId = value.split("|")[0];
-	const roomName = value.split("|")[1];
+	debugger;
+	const roomId = document.getElementById("RoomsPicklist").value;
+	const roomName = document.getElementById(roomId).innerHTML;
 	const computerNumber = document.getElementById("ComputerNumber").value;
 
 	if (roomId && computerNumber && Math.floor(computerNumber)) {

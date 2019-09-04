@@ -350,7 +350,7 @@ module.exports = class ELMainHelper {
 			}
 			config.logger.logs.addMessage(config.logger.levels.fatal, "ERROR", msg);
 			config.logger.logs.addMessage(config.logger.levels.stack, "ERROR", `${stack}`);
-			config.electron.mainHelper.handleCriticalError_ShowMsgBox(`${ex} @ ${stack}`);
+			config.electron.mainHelper.handleCriticalError_ShowMsgBox(`${msg} @ ${stack}`);
 		}
 	}
 
