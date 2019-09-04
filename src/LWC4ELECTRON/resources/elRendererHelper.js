@@ -52,8 +52,10 @@ ipcRenderer.on("fromMain", (event, message) => {
 	// Get the callback
 	const callBackId = message.callBackId;
 	const callback = evMap.callbacks[callBackId];
-	delete evMap.callbacks[callBackId];
 
 	// Invoke it
-	callback(message);
+	if (callback) {
+		delete evMap.callbacks[callBackId];
+		callback(message);
+	}
 });

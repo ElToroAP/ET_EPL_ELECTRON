@@ -52,6 +52,16 @@ module.exports = class ETEPL_Client {
 		// https://electronjs.org/docs/api/net
 		// https://electronjs.org/docs/api/client-request
 		return new Promise((resolve, reject) => {
+			if (config.debug.showCallouts) {
+				console.log(
+					`${JSON.stringify({
+						dttm: new Date(),
+						request: `${method} ${reqUrl}`,
+						sends: inputData
+					})},`
+				);
+			}
+
 			let outputData = "";
 			inputData = JSON.stringify(inputData);
 
@@ -78,6 +88,15 @@ module.exports = class ETEPL_Client {
 					let output;
 					try {
 						output = JSON.parse(outputData);
+						if (config.debug.showCallouts) {
+							console.log(
+								`${JSON.stringify({
+									dttm: new Date(),
+									response: `${method} ${reqUrl}`,
+									receives: output
+								})},`
+							);
+						}
 					} catch (ex) {
 						config.electron.mainHelper.handleCriticalError(ex);
 						config.logger.logs.addMessage(config.logger.levels.info, "Web Service", `Error converting Output data to JSON`);

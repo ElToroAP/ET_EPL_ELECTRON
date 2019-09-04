@@ -32,6 +32,7 @@ module.exports = class ETEPL_ComputerSetup {
 				};
 				break;
 			case "setup-setData":
+				config.electron.mainHelper.showHideWindow(false);
 				const electronJson = this.updateElectronJson(message);
 				this.registerComputer(electronJson);
 

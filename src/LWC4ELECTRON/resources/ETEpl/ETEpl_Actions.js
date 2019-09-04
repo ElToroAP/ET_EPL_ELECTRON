@@ -34,6 +34,7 @@ module.exports = class ETEPL_Actions {
 	}
 
 	reset() {
+		config.logger.logs.addMessage(config.logger.levels.fatal, "ABORT", config.actions.fifo[0]);
 		config.actions.fifo = [];
 		config.actions.closePage();
 		// Reset testStep
@@ -60,7 +61,7 @@ module.exports = class ETEPL_Actions {
 			this.testPing();
 
 			if (config.electron.dialogOpen) {
-				config.logger.logs.addMessage(config.logger.levels.trace, "Master Tick", `Skip action: ${action.data.name} (dialog open)`);
+				config.logger.logs.addMessage(config.logger.levels.trace, "Master Tick", `Skip action (dialog open)`);
 				config.logger.logs.addMessage(config.logger.levels.data, "Master Tick (Skip)", action.data);
 			} else {
 				const action = config.actions.fifo[0];

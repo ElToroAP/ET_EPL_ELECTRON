@@ -1,10 +1,11 @@
 {
-  "eventId": "a001h000003PJ6RAAW",
-  "roomId": "a031h000001egq6AAA",
-  "computerNumber": "1",
-  "IPAddress": "204.14.236.153",
-  "IPAddressId": "a011h000002jhYgAAI",
-  "locationId": "a021h000001JNrWAAW",
-  "computerId": 11,
-  "testStep": 0
+  "eventId": "a004T000000wHKaQAM",
+  "testStep": 0,
+  "roomId": "a034T000000lxbkQAA",
+  "roomName": "Miro",
+  "computerNumber": "12",
+  "IPAddress": "127.0.0.1",
+  "IPAddressId": "a014T000000Oo5DQAS",
+  "locationId": "a024T000000x6jBQAQ",
+  "computerId": 6
 }

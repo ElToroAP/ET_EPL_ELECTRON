@@ -1,0 +1,300 @@
+[
+	{ "dttm": "2019-09-04T19:11:08.129Z", "request": "POST http://localhost:5000/handshake", "sends": { "eventId": "a004T000000wHKaQAM", "testStep": 0 } },
+	{
+		"dttm": "2019-09-04T19:11:08.836Z",
+		"response": "POST http://localhost:5000/handshake",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:08.196Z",
+			"input": { "eventId": "a004T000000wHKaQAM", "testStep": 0 },
+			"output": {
+				"action": "SETUP",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"rooms": [
+					{ "sfid": "a034T000000lxbmQAA", "name": "Gaudi 1" },
+					{ "sfid": "a034T000000lxbpQAA", "name": "Gaudi 2" },
+					{ "sfid": "a034T000000lxboQAA", "name": "Gaudi 3" },
+					{ "sfid": "a034T000000lxbnQAA", "name": "Gaudi 4" },
+					{ "sfid": "a034T000000lxbkQAA", "name": "Miro" },
+					{ "sfid": "a034T000000lxbqQAA", "name": "Pau Casals 1" },
+					{ "sfid": "a034T000000lxbrQAA", "name": "Pau Casals 2" },
+					{ "sfid": "a034T000000lxblQAA", "name": "Picasso" }
+				]
+			},
+			"error": null,
+			"TMP": {
+				"eventId": "a004T000000wHKaQAM",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"rooms": [
+					{ "sfid": "a034T000000lxbmQAA", "name": "Gaudi 1" },
+					{ "sfid": "a034T000000lxbpQAA", "name": "Gaudi 2" },
+					{ "sfid": "a034T000000lxboQAA", "name": "Gaudi 3" },
+					{ "sfid": "a034T000000lxbnQAA", "name": "Gaudi 4" },
+					{ "sfid": "a034T000000lxbkQAA", "name": "Miro" },
+					{ "sfid": "a034T000000lxbqQAA", "name": "Pau Casals 1" },
+					{ "sfid": "a034T000000lxbrQAA", "name": "Pau Casals 2" },
+					{ "sfid": "a034T000000lxblQAA", "name": "Picasso" }
+				]
+			},
+			"timers": {
+				"master": { "pattern": [0, 1, 0] },
+				"user": { "pattern": [10, 0, 0] },
+				"autoClick": { "pattern": [0, 5, 0] },
+				"reset": { "pattern": [15, 0, 0] },
+				"callout": { "pattern": [2, 0, 0] },
+				"pageLoad": { "pattern": [2, 0, 0] },
+				"breathe": { "pattern": [0, 1, 0] }
+			}
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:22.501Z",
+		"request": "POST http://localhost:5000/register",
+		"sends": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12" }
+	},
+	{
+		"dttm": "2019-09-04T19:11:22.805Z",
+		"response": "POST http://localhost:5000/register",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:22.511Z",
+			"input": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12" },
+			"error": null,
+			"output": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12", "IPAddress": "127.0.0.1", "IPAddressId": null }
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:25.214Z",
+		"request": "POST http://localhost:5000/handshake",
+		"sends": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12", "IPAddress": "127.0.0.1", "IPAddressId": null }
+	},
+	{
+		"dttm": "2019-09-04T19:11:25.407Z",
+		"response": "POST http://localhost:5000/handshake",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:25.217Z",
+			"input": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12", "IPAddress": "127.0.0.1", "IPAddressId": null },
+			"output": {
+				"action": "SETUP",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"rooms": [
+					{ "sfid": "a034T000000lxbmQAA", "name": "Gaudi 1" },
+					{ "sfid": "a034T000000lxbpQAA", "name": "Gaudi 2" },
+					{ "sfid": "a034T000000lxboQAA", "name": "Gaudi 3" },
+					{ "sfid": "a034T000000lxbnQAA", "name": "Gaudi 4" },
+					{ "sfid": "a034T000000lxbkQAA", "name": "Miro" },
+					{ "sfid": "a034T000000lxbqQAA", "name": "Pau Casals 1" },
+					{ "sfid": "a034T000000lxbrQAA", "name": "Pau Casals 2" },
+					{ "sfid": "a034T000000lxblQAA", "name": "Picasso" }
+				]
+			},
+			"error": null,
+			"TMP": {
+				"eventId": "a004T000000wHKaQAM",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"rooms": [
+					{ "sfid": "a034T000000lxbmQAA", "name": "Gaudi 1" },
+					{ "sfid": "a034T000000lxbpQAA", "name": "Gaudi 2" },
+					{ "sfid": "a034T000000lxboQAA", "name": "Gaudi 3" },
+					{ "sfid": "a034T000000lxbnQAA", "name": "Gaudi 4" },
+					{ "sfid": "a034T000000lxbkQAA", "name": "Miro" },
+					{ "sfid": "a034T000000lxbqQAA", "name": "Pau Casals 1" },
+					{ "sfid": "a034T000000lxbrQAA", "name": "Pau Casals 2" },
+					{ "sfid": "a034T000000lxblQAA", "name": "Picasso" }
+				]
+			},
+			"timers": {
+				"master": { "pattern": [0, 1, 0] },
+				"user": { "pattern": [10, 0, 0] },
+				"autoClick": { "pattern": [0, 5, 0] },
+				"reset": { "pattern": [15, 0, 0] },
+				"callout": { "pattern": [2, 0, 0] },
+				"pageLoad": { "pattern": [2, 0, 0] },
+				"breathe": { "pattern": [0, 1, 0] }
+			}
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:30.236Z",
+		"request": "POST http://localhost:5000/register",
+		"sends": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12", "IPAddress": "127.0.0.1", "IPAddressId": null }
+	},
+	{
+		"dttm": "2019-09-04T19:11:30.328Z",
+		"response": "POST http://localhost:5000/register",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:30.240Z",
+			"input": { "eventId": "a004T000000wHKaQAM", "testStep": 0, "roomId": "a034T000000lxbkQAA", "roomName": "Miro", "computerNumber": "12", "IPAddress": "127.0.0.1", "IPAddressId": null },
+			"error": null,
+			"output": {
+				"eventId": "a004T000000wHKaQAM",
+				"testStep": 0,
+				"roomId": "a034T000000lxbkQAA",
+				"roomName": "Miro",
+				"computerNumber": "12",
+				"IPAddress": "127.0.0.1",
+				"IPAddressId": "a014T000000Oo5DQAS",
+				"locationId": null
+			}
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:33.250Z",
+		"request": "POST http://localhost:5000/handshake",
+		"sends": {
+			"eventId": "a004T000000wHKaQAM",
+			"testStep": 0,
+			"roomId": "a034T000000lxbkQAA",
+			"roomName": "Miro",
+			"computerNumber": "12",
+			"IPAddress": "127.0.0.1",
+			"IPAddressId": "a014T000000Oo5DQAS",
+			"locationId": null
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:33.428Z",
+		"response": "POST http://localhost:5000/handshake",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:33.254Z",
+			"input": {
+				"eventId": "a004T000000wHKaQAM",
+				"testStep": 0,
+				"roomId": "a034T000000lxbkQAA",
+				"roomName": "Miro",
+				"computerNumber": "12",
+				"IPAddress": "127.0.0.1",
+				"IPAddressId": "a014T000000Oo5DQAS",
+				"locationId": null
+			},
+			"output": {
+				"action": "SETUP",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"rooms": [
+					{ "sfid": "a034T000000lxbmQAA", "name": "Gaudi 1" },
+					{ "sfid": "a034T000000lxbpQAA", "name": "Gaudi 2" },
+					{ "sfid": "a034T000000lxboQAA", "name": "Gaudi 3" },
+					{ "sfid": "a034T000000lxbnQAA", "name": "Gaudi 4" },
+					{ "sfid": "a034T000000lxbkQAA", "name": "Miro" },
+					{ "sfid": "a034T000000lxbqQAA", "name": "Pau Casals 1" },
+					{ "sfid": "a034T000000lxbrQAA", "name": "Pau Casals 2" },
+					{ "sfid": "a034T000000lxblQAA", "name": "Picasso" }
+				]
+			},
+			"error": null,
+			"TMP": {
+				"eventId": "a004T000000wHKaQAM",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"rooms": [
+					{ "sfid": "a034T000000lxbmQAA", "name": "Gaudi 1" },
+					{ "sfid": "a034T000000lxbpQAA", "name": "Gaudi 2" },
+					{ "sfid": "a034T000000lxboQAA", "name": "Gaudi 3" },
+					{ "sfid": "a034T000000lxbnQAA", "name": "Gaudi 4" },
+					{ "sfid": "a034T000000lxbkQAA", "name": "Miro" },
+					{ "sfid": "a034T000000lxbqQAA", "name": "Pau Casals 1" },
+					{ "sfid": "a034T000000lxbrQAA", "name": "Pau Casals 2" },
+					{ "sfid": "a034T000000lxblQAA", "name": "Picasso" }
+				]
+			},
+			"timers": {
+				"master": { "pattern": [0, 1, 0] },
+				"user": { "pattern": [10, 0, 0] },
+				"autoClick": { "pattern": [0, 5, 0] },
+				"reset": { "pattern": [15, 0, 0] },
+				"callout": { "pattern": [2, 0, 0] },
+				"pageLoad": { "pattern": [2, 0, 0] },
+				"breathe": { "pattern": [0, 1, 0] }
+			}
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:38.276Z",
+		"request": "POST http://localhost:5000/register",
+		"sends": {
+			"eventId": "a004T000000wHKaQAM",
+			"testStep": 0,
+			"roomId": "a034T000000lxbkQAA",
+			"roomName": "Miro",
+			"computerNumber": "12",
+			"IPAddress": "127.0.0.1",
+			"IPAddressId": "a014T000000Oo5DQAS",
+			"locationId": null
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:38.399Z",
+		"response": "POST http://localhost:5000/register",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:38.281Z",
+			"input": {
+				"eventId": "a004T000000wHKaQAM",
+				"testStep": 0,
+				"roomId": "a034T000000lxbkQAA",
+				"roomName": "Miro",
+				"computerNumber": "12",
+				"IPAddress": "127.0.0.1",
+				"IPAddressId": "a014T000000Oo5DQAS",
+				"locationId": null
+			},
+			"error": null,
+			"output": {
+				"eventId": "a004T000000wHKaQAM",
+				"testStep": 0,
+				"roomId": "a034T000000lxbkQAA",
+				"roomName": "Miro",
+				"computerNumber": "12",
+				"IPAddress": "127.0.0.1",
+				"IPAddressId": "a014T000000Oo5DQAS",
+				"locationId": "a024T000000x6jBQAQ",
+				"computerId": 6
+			}
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:41.288Z",
+		"request": "POST http://localhost:5000/handshake",
+		"sends": {
+			"eventId": "a004T000000wHKaQAM",
+			"testStep": 0,
+			"roomId": "a034T000000lxbkQAA",
+			"roomName": "Miro",
+			"computerNumber": "12",
+			"IPAddress": "127.0.0.1",
+			"IPAddressId": "a014T000000Oo5DQAS",
+			"locationId": "a024T000000x6jBQAQ",
+			"computerId": 6
+		}
+	},
+	{
+		"dttm": "2019-09-04T19:11:41.377Z",
+		"response": "POST http://localhost:5000/handshake",
+		"receives": {
+			"serverDTTM": "2019-09-04T19:11:41.292Z",
+			"input": {
+				"eventId": "a004T000000wHKaQAM",
+				"testStep": 0,
+				"roomId": "a034T000000lxbkQAA",
+				"roomName": "Miro",
+				"computerNumber": "12",
+				"IPAddress": "127.0.0.1",
+				"IPAddressId": "a014T000000Oo5DQAS",
+				"locationId": "a024T000000x6jBQAQ",
+				"computerId": 6
+			},
+			"output": { "action": "SLEEP", "pattern": "[1, 0, 0]" },
+			"error": null,
+			"TMP": {
+				"eventId": "a004T000000wHKaQAM",
+				"event": { "sfid": "a004T000000wHKaQAM", "name": "Trailhead Spain Barcelona", "status__c": "Active Event | Computer Setup", "isactive__c": "YES" },
+				"computer": { "id": 6, "epl_location": "a024T000000x6jBQAQ", "computernumber": 12, "specialrequests": "[]", "lastseen": "2019-09-04T19:11:41.333Z" }
+			},
+			"timers": {
+				"master": { "pattern": [0, 1, 0] },
+				"user": { "pattern": [10, 0, 0] },
+				"autoClick": { "pattern": [0, 5, 0] },
+				"reset": { "pattern": [15, 0, 0] },
+				"callout": { "pattern": [2, 0, 0] },
+				"pageLoad": { "pattern": [2, 0, 0] },
+				"breathe": { "pattern": [0, 1, 0] }
+			}
+		}
+	}
+]
