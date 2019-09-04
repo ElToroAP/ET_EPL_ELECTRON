@@ -69,7 +69,6 @@ module.exports = class ETEPL_Handshake {
 					case "SETUP":
 						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SETUP requested by server");
 						if (electronJson.resetStrength > 0) {
-							debugger;
 							config.actions.add(new ETEPL_ComputerSetup(config, { ...response.output, ...electronJson }));
 						} else {
 							if (electronJson.computerId) {

@@ -39,7 +39,6 @@ function RoomNumberKeyUp(event) {
 }
 
 function RegisterComputerClick() {
-	debugger;
 	const roomId = document.getElementById("RoomsPicklist").value;
 	const roomName = document.getElementById(roomId).innerHTML;
 	const computerNumber = document.getElementById("ComputerNumber").value;

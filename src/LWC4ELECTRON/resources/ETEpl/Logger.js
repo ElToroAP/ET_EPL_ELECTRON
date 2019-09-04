@@ -125,6 +125,7 @@ const Logger = {
 				// Test it
 				if (data.message.indexOf("[object Object]") >= 0) {
 					// Find who is producing this.
+					// Keep this debugger! - WHY am I here?
 					debugger;
 				}
 

@@ -361,6 +361,7 @@ module.exports = class ELMainHelper {
 			dialog.showErrorBox(`Critical Error`, msg);
 			config.electron.dialogOpen = false;
 		} else {
+			// Keep this debugger! - WHY am I here?
 			debugger;
 		}
 	}
