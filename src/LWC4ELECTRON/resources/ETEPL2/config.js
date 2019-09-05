@@ -62,6 +62,7 @@ module.exports = class Config {
 		// Local Files
 		config.local.demo = `file://${rootFolder}/demo.html`;
 		config.local.blank = `file://${rootFolder}/blank.html`;
+		config.local.bye = `file://${rootFolder}/bye.html`;
 		config.local.setup = `file://${rootFolder}/setup.html`;
 		config.local.electronJson = `${rootFolder}/data/electron.json`;
 		config.local.icon = `${rootFolder}/icons/TrailheadBgNone32.png`;

@@ -15,8 +15,8 @@ const nativeImage = electron.nativeImage;
 const BrowserWindow = electron.BrowserWindow;
 
 // Other libraries
-const ETEPL_Client = require("./ETEpl/ETEPL_Client");
-const Config = require("./ETEpl/config");
+const ETEPL_Client = require("./ETEPL2/ETEPL_Client");
+const Config = require("./ETEPL2/config");
 const child_process = require("child_process");
 
 // Other static variables

@@ -44,21 +44,21 @@ module.exports = class ETEPL_Handshake {
 				// }
 				config.setTimers(config, response.timers);
 				switch (response.output.action) {
-					case "ABORT":
+					// Kill the app, in case somehting horrible happens :-)
+					case "ABORT": {
 						// Critical error, application must be killed.
 						config.logger.logs.addMessage(config.logger.levels.fatal, "Handshake", "Quiting Application");
 						config.logger.logs.addMessage(config.logger.levels.data, "Handshake", response.output.message);
-						config.electron.preventQuit = false;
-						config.electron.app.quit();
+						// config.electron.mainHelper.showHideWindow(true);
+						config.electron.mainHelper.loadPage(config.local.bye, true);
+						setTimeout(() => {
+							config.electron.preventQuit = false;
+							config.electron.app.quit();
+						}, config.timer.autoClick.value);
 						break;
-					case "SAVE":
-						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SAVE requested by server");
-						config.logger.logs.addMessage(config.logger.levels.data, "Handshake", response.output.file);
-						config.etEpl.writeElectronJson(response.output.file);
-						config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
-						that.data.readyToRemove = true;
-						break;
-					case "RESET":
+					}
+					// Save the electonJson file pased from server and wait for next handshake.
+					case "RESET": {
 						// In the next cycle, perform a handhake with the electron.json file provided by the server
 						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "RESET requested by server");
 						config.logger.logs.addMessage(config.logger.levels.data, "Handshake", response.output.file);
@@ -66,7 +66,9 @@ module.exports = class ETEPL_Handshake {
 						config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
 						that.data.readyToRemove = true;
 						break;
-					case "SETUP":
+					}
+					// Perform setup stpes, with optional showing of the screen to set the room and the computer number
+					case "SETUP": {
 						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SETUP requested by server");
 						if (electronJson.resetStrength > 0) {
 							config.actions.add(new ETEPL_ComputerSetup(config, { ...response.output, ...electronJson }));
@@ -83,18 +85,31 @@ module.exports = class ETEPL_Handshake {
 						}
 						that.data.readyToRemove = true;
 						break;
-					case "LOGIN":
+					}
+					// Perform the login to the exam
+					case "LOGIN": {
 						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "LOGIN requested by server");
 						config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
 						config.actions.add(new ETEPL_ComputerLogin(config, response.output));
 						that.data.readyToRemove = true;
 						break;
-					case "SLEEP":
+					}
+					// Perform the login to the exam
+					case "SHOW_HIDE": {
+						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SHOW_HIDE requested by server");
+						config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.breathe.value)); // ET_TIME
+						config.actions.add(new ETEPL_ShowHide(config, response.output));
+						that.data.readyToRemove = true;
+						break;
+					}
+					// Wait for the next ping
+					case "SLEEP": {
 						config.logger.logs.addMessage(config.logger.levels.info, "Handshake", "SLEEP requested by server");
 						let ms = config.getMillisecondsFromPattern(config, "Handshake", JSON.parse(response.output.pattern));
 						config.actions.add(new ETEPL_PauseMilliseconds(config, ms)); // ET_TIME
 						that.data.readyToRemove = true;
 						break;
+					}
 					default:
 						break;
 				}

@@ -1,4 +1,11 @@
 {
+  "resetStrength": 2,
+  "roomId": "a034T000000lxbmQAA",
+  "roomName": "Gaudi 1",
+  "computerNumber": "1",
   "eventId": "a004T000000wHKaQAM",
-  "testStep": 0
+  "IPAddress": "127.0.0.1",
+  "IPAddressId": "a014T0000015d7LQAQ",
+  "locationId": "a024T000000xFMWQA2",
+  "computerId": 11
 }
