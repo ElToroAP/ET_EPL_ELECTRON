@@ -7,7 +7,7 @@
 			"localhost_": "http://localhost:5000",
 			"production": "https://et-epl-stage.herokuapp.com"
 		},
-		"pingServer": "http://localhost:5000"
+		"pingServer": "https://et-epl-stage.herokuapp.com"
 	},
 	"timer": {
 		"master": {
@@ -21,15 +21,6 @@
 		},
 		"autoClick": {
 			"pattern": [0, 5, 0]
-		},
-		"XpageLoad": {
-			"pattern": [0, 0, 0]
-		},
-		"Xbreathe": {
-			"pattern": [0, 0, 0]
-		},
-		"Xuser": {
-			"pattern": [0, 0, 0]
 		}
 	}
 }

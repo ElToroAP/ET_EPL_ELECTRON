@@ -140,18 +140,16 @@ module.exports = class ELMainHelper {
 			}
 		});
 
-		// Download Test
-		if (config.debug.fullMenus) {
-			trayMenu.push({
-				label: "Download Test",
-				click: (/* menuItem, browserWindow, event */) => {
-					config.electron.mainHelper.loadPage(config.pages.sampleFile);
-				}
-			});
-		}
+		// Check speed
+		trayMenu.push({
+			label: "Check speed",
+			click: (/* menuItem, browserWindow, event */) => {
+				config.electron.mainHelper.loadPage("https://www.google.com/search?q=google+speed+test");
+			}
+		});
 
+		// Chrome Developer tools
 		if (config.debug.openDevTools) {
-			// Chrome Developer tools
 			trayMenu.push({
 				label: "Developer Tools",
 				click: () => {
@@ -160,22 +158,24 @@ module.exports = class ELMainHelper {
 			});
 		}
 
-		// // Check speed
-		// trayMenu.push({
-		// 	label: "Check speed",
-		// 	click: (/* menuItem, browserWindow, event */) => {
-		// 		dialog.showErrorBox(`Not Implemented yet`, `Need to implement this!`);
-		// 	}
-		// });
+		if (config.debug.fullMenus) {
+			// Download Test
+			trayMenu.push({
+				label: "Download Test",
+				click: (/* menuItem, browserWindow, event */) => {
+					config.electron.mainHelper.loadPage(config.pages.sampleFile);
+				}
+			});
 
-		// // Quit
-		// trayMenu.push({
-		// 	label: "Quit",
-		// 	click: () => {
-		// 		config.electron.preventQuit = false;
-		// 		config.electron.app.quit();
-		// 	}
-		// });
+			// Quit
+			trayMenu.push({
+				label: "Quit",
+				click: () => {
+					config.electron.preventQuit = false;
+					config.electron.app.quit();
+				}
+			});
+		}
 
 		return trayMenu;
 	}

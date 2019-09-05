@@ -1,6 +1,6 @@
 {
 	"mode": "fatal",
-	"openDevTools": true,
+	"openDevTools": false,
 	"fullMenus": true,
 	"preventQuit": true,
 	"useFakeIPAddress": false,
