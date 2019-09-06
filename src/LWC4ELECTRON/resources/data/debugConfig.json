@@ -1,7 +1,7 @@
 {
 	"mode": "fatal",
 	"openDevTools": false,
-	"fullMenus": true,
+	"fullMenus": false,
 	"preventQuit": true,
 	"useFakeIPAddress": false,
 	"showCallouts": true,

@@ -144,7 +144,7 @@ module.exports = class ELMainHelper {
 		trayMenu.push({
 			label: "Check speed",
 			click: (/* menuItem, browserWindow, event */) => {
-				config.electron.mainHelper.loadPage("https://www.google.com/search?q=google+speed+test");
+				config.electron.mainHelper.loadPage("https://www.google.com/search?q=google+internet+speed+test");
 			}
 		});
 
