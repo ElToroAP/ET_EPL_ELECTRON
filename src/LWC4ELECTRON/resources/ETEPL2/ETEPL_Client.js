@@ -23,15 +23,9 @@ module.exports = class ETEPL_Client {
 		// Actions
 		config.actions = new ETEPL_Actions(config);
 		config.actions.add(new ETEPL_PauseCycles(config, 5));
+		config.etEpl.resetTest();
 		// Start clock...
 		this._startClock();
-
-		// Reset testStep
-		const electronJson = config.etEpl.readElectronJson();
-		delete electronJson.testStep;
-		delete electronJson.forcedLogin;
-		delete electronJson.resetStrength;
-		config.etEpl.writeElectronJson(electronJson);
 	}
 
 	_startClock() {
@@ -158,5 +152,13 @@ module.exports = class ETEPL_Client {
 			config.electron.mainHelper.handleCriticalError(ex);
 			config.logger.logs.addException(config.logger.levels.fatal, "write File", ex);
 		}
+	}
+
+	resetTest() {
+		const electronJson = config.etEpl.readElectronJson();
+		delete electronJson.testStep;
+		delete electronJson.forcedLogin;
+		delete electronJson.resetStrength;
+		config.etEpl.writeElectronJson(electronJson);
 	}
 };

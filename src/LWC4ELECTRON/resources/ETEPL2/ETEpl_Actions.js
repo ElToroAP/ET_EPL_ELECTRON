@@ -37,10 +37,7 @@ module.exports = class ETEPL_Actions {
 		config.logger.logs.addMessage(config.logger.levels.fatal, "ABORT", config.actions.fifo[0]);
 		config.actions.fifo = [];
 		config.actions.closePage();
-		// Reset testStep
-		const electronJson = config.etEpl.readElectronJson();
-		electronJson.testStep = 0;
-		config.etEpl.writeElectronJson(electronJson);
+		config.etEpl.resetTest();
 		config.actions.add(new ETEPL_PauseMilliseconds(config, config.timer.reset.value)); // ET_TIME
 	}
 

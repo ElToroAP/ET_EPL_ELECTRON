@@ -5,6 +5,7 @@
 const ETEPL_PauseMilliseconds = require("./ETEPL_PauseMilliseconds");
 const ETEPL_ComputerSetup = require("./ETEPL_ComputerSetup");
 const ETEPL_ComputerLogin = require("./ETEPL_ComputerLogin");
+const ETEPL_ShowHide = require("./ETEPL_ShowHide");
 
 let config;
 

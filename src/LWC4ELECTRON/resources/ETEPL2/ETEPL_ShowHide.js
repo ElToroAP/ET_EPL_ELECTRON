@@ -25,7 +25,7 @@ module.exports = class ETEPL_ShowHide {
 	}
 
 	handleMessage(message) {
-		that.data.readyToRemove = true;
+		this.data.readyToRemove = true;
 	}
 
 	tick() {
