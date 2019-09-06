@@ -1,0 +1,12 @@
+{
+	"dttm": "2019-09-06T08:22:20.814Z",
+	"request": "POST http://localhost:5000/handshake",
+	"sends": {
+		"locationId": "a024T000000xGA6QAM",
+		"computerId": 14,
+		"roomId": "a034T000000mQpsQAE",
+		"roomName": "_ELTORO (Andres Perez) Test -- Do Not Use",
+		"computerNumber": "1",
+		"eventId": "a004T000000wHKaQAM"
+	}
+}

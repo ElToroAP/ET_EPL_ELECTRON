@@ -212,6 +212,10 @@ module.exports = class ELMainHelper {
 					while (!examStarted) {
 						try {
 							child_process.execSync(cmd);
+							const electronJson = config.etEpl.readElectronJson();
+							delete electronJson.forcedLogin;
+							config.etEpl.writeElectronJson(electronJson);
+
 							// EXAM HAS SARTED!!!
 							examStarted = true;
 						} catch (ex) {

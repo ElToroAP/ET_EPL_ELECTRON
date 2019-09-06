@@ -28,7 +28,9 @@ module.exports = class ETEPL_Client {
 
 		// Reset testStep
 		const electronJson = config.etEpl.readElectronJson();
-		electronJson.testStep = 0;
+		delete electronJson.testStep;
+		delete electronJson.forcedLogin;
+		delete electronJson.resetStrength;
 		config.etEpl.writeElectronJson(electronJson);
 	}
 
