@@ -1,9 +1,0 @@
-{
-	"mode": "fatal",
-	"openDevTools": false,
-	"fullMenus": false,
-	"preventQuit": true,
-	"useFakeIPAddress": false,
-	"showCallouts": true,
-	"testPings": -1
-}
