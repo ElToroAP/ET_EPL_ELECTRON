@@ -6,8 +6,5 @@
   "IPAddress": "213.27.197.53",
   "IPAddressId": "a014T0000016ot1QAA",
   "locationId": "a024T000000xKKeQAM",
-  "computerId": 17,
-  "testStep": 3,
-  "forcedLogin": "YES",
-  "resetStrength": 4
+  "computerId": 17
 }

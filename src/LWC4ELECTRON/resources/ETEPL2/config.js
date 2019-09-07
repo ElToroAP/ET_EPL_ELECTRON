@@ -28,7 +28,7 @@ module.exports = class Config {
 		config.whichOS(config);
 
 		// Initialize Config
-		console.log(`Root Folder: ${rootFolder}`);
+		// console.log(`Root Folder: ${rootFolder}`);
 		const core = config.readFile(rootFolder, "coreConfig");
 		config.local = {};
 		config.pages = core.pages;
@@ -36,6 +36,14 @@ module.exports = class Config {
 
 		// Initialize Debug
 		config.debug = config.readFile(rootFolder, "debugConfig");
+		if (!("mode" in config.debug)) config.debug["mode"] = "fatal";
+		if (!("openDevTools" in config.debug)) config.debug["openDevTools"] = false;
+		if (!("fullMenus" in config.debug)) config.debug["fullMenus"] = false;
+		if (!("preventQuit" in config.debug)) config.debug["preventQuit"] = true;
+		if (!("useFakeIPAddress" in config.debug)) config.debug["useFakeIPAddress"] = false;
+		if (!("showCallouts" in config.debug)) config.debug["showCallouts"] = false;
+		if (!("testPings" in config.debug)) config.debug["testPings"] = -1;
+
 		config.debug.removeOldLogs = core.removeOldLogs;
 		config.debug.interruptWithDialog = core.interruptWithDialog;
 		if (config.debug.mode) config.debug.mode = config.debug.mode.toLowerCase();
@@ -83,7 +91,7 @@ module.exports = class Config {
 		try {
 			const path = `${rootFolder}/data/${fileName}.json`;
 			fileContents = JSON.parse(fs.readFileSync(path));
-			console.log(`Read file: ${path}`);
+			// console.log(`Read file: ${path}`);
 		} catch (ex) {
 			fileContents = {};
 		}
@@ -124,7 +132,7 @@ module.exports = class Config {
 		OS.current = platformNames[os.platform()];
 		OS.isWin = OS.current === platformNames.win32;
 		OS.isMac = OS.current === platformNames.darwin;
-		console.log(`OS: [${os.platform()}] => ${OS.current}. Mac? [${OS.isMac}]. Win? [${OS.isWin}]`);
+		// console.log(`OS: [${os.platform()}] => ${OS.current}. Mac? [${OS.isMac}]. Win? [${OS.isWin}]`);
 		config.os = OS;
 	}
 

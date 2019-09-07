@@ -158,6 +158,13 @@ module.exports = class ELMainHelper {
 			});
 		}
 
+		trayMenu.push({
+			label: "Abort",
+			click: (/* menuItem, browserWindow, event */) => {
+				config.actions.reset();
+			}
+		});
+
 		if (config.debug.fullMenus) {
 			// Download Test
 			trayMenu.push({

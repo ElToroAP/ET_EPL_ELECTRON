@@ -92,21 +92,27 @@ module.exports = class ETEPL_ComputerLogin {
 				config.electron.mainWindow.webContents.openDevTools();
 			}
 
-			// Username
-			script += `elInput = document.querySelector("${control.un[0]}");\n`;
-			script += 'elInput.dispatchEvent(new Event("focus", { bubbles: true }));\n';
-			script += `elInput.value = "${control.un[1]}";\n`;
-			script += 'elInput.dispatchEvent(new Event("input", { bubbles: true }));\n';
-			script += `elButton = document.querySelector("${control.button[0]}");\n`;
-			script += 'elButton.dispatchEvent(new Event("focus", { bubbles: true }));\n';
+			for (let i = 0; i < 3; i++) {
+				script += "window.setTimeout(function() {\n";
 
-			// Password
-			script += `elInput = document.querySelector("${control.pw[0]}");\n`;
-			script += 'elInput.dispatchEvent(new Event("focus", { bubbles: true }));\n';
-			script += `elInput.value = "${control.pw[1]}";\n`;
-			script += 'elInput.dispatchEvent(new Event("input", { bubbles: true }));\n';
-			script += `elButton = document.querySelector("${control.button[0]}");\n`;
-			script += 'elButton.dispatchEvent(new Event("focus", { bubbles: true }));\n';
+				// Username
+				script += `elInput = document.querySelector("${control.un[0]}");\n`;
+				script += 'elInput.dispatchEvent(new Event("focus", { bubbles: true }));\n';
+				script += `elInput.value = "${control.un[1]}";\n`;
+				script += 'elInput.dispatchEvent(new Event("input", { bubbles: true }));\n';
+				script += `elButton = document.querySelector("${control.button[0]}");\n`;
+				script += 'elButton.dispatchEvent(new Event("focus", { bubbles: true }));\n';
+
+				// Password
+				script += `elInput = document.querySelector("${control.pw[0]}");\n`;
+				script += 'elInput.dispatchEvent(new Event("focus", { bubbles: true }));\n';
+				script += `elInput.value = "${control.pw[1]}";\n`;
+				script += 'elInput.dispatchEvent(new Event("input", { bubbles: true }));\n';
+				script += `elButton = document.querySelector("${control.button[0]}");\n`;
+				script += 'elButton.dispatchEvent(new Event("focus", { bubbles: true }));\n';
+
+				script += `}, 10);\n`;
+			}
 
 			// Login Button
 			script += "window.setTimeout(function() {\n";
@@ -117,7 +123,7 @@ module.exports = class ETEPL_ComputerLogin {
 			script += `\telButton = document.querySelector("${control.button[0]}");\n`;
 			script += '\telButton.dispatchEvent(new Event("focus", { bubbles: true }));\n';
 			script += '\telButton.dispatchEvent(new Event("click", { bubbles: true }));\n';
-			script += `}, ${config.timer.autoClick.value});\n`;
+			script += `}, ${100 + config.timer.autoClick.value});\n`;
 
 			// console.log(script);
 			config.electron.mainWindow.webContents.executeJavaScript(script);
