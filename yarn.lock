@@ -839,13 +839,6 @@ electron-rebuild@^1.8.5:
     spawn-rx "^3.0.0"
     yargs "^13.2.2"
 
-electron-squirrel-startup@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/electron-squirrel-startup/-/electron-squirrel-startup-1.0.0.tgz#19b4e55933fa0ef8f556784b9c660f772546a0b8"
-  integrity sha1-GbTlWTP6Dvj1VnhLnGYPdyVGoLg=
-  dependencies:
-    debug "^2.2.0"
-
 electron-winstaller@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/electron-winstaller/-/electron-winstaller-3.0.4.tgz#29294e323499147ecc8f47d6d2befd6e4ab9ba8c"
@@ -1009,6 +1002,11 @@ find-up@^4.1.0:
   dependencies:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
+
+flatted@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
+  integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
 
 flora-colossus@^1.0.0:
   version "1.0.1"
@@ -2762,9 +2760,9 @@ xtend@~2.1.1:
     object-keys "~0.4.0"
 
 y18n@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
-  integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.1.tgz#8db2b83c31c5d75099bb890b23f3094891e247d4"
+  integrity sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
 
 yallist@^2.1.2:
   version "2.1.2"
